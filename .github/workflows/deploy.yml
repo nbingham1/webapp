@@ -98,10 +98,10 @@ jobs:
           terraform validate -no-color
           terraform apply -auto-approve
 
-					cd ../03_ansible
+          cd ../03_ansible
           ./setup.sh $(terraform output -raw public_dns) ${{ env.REGISTRY }}/${{ env.BACKEND_NAME }}
           ansible-playbook -i inventory.ini playbook.yml
-					terraform output -raw public_ip
+          terraform output -raw public_ip
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
