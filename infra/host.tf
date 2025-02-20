@@ -67,21 +67,12 @@ resource "aws_instance" "my_host" {
 	}
 }
 
-#data "aws_iam_policy" "policy_ec2_all" {
-#  arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
-#}
-
-#resource "aws_iam_role" "my_management_role" {
-#  name = "my_management_role"
-#	assume_role_policy = data.aws_iam_policy.policy_ec2_all.policy
-#}
-
 resource "aws_budgets_budget_action" "my_shutdown" {
-	budget_name        = "Alpha Deploy Budget"
+	budget_name        = data.aws_budgets_budget.zero_budget.name
 	action_type        = "RUN_SSM_DOCUMENTS"
 	approval_model     = "AUTOMATIC"
 	notification_type  = "ACTUAL"
-	execution_role_arn = "arn:aws:iam::034362046481:role/BudgetEc2"
+	execution_role_arn = data.aws_iam_role.budget_ec2.arn
 
 	action_threshold {
 		action_threshold_type  = "ABSOLUTE_VALUE"
@@ -101,4 +92,3 @@ resource "aws_budgets_budget_action" "my_shutdown" {
 		subscription_type = "EMAIL"
 	}
 }
-
