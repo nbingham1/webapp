@@ -2,7 +2,7 @@
 
 cat <<EOF > inventory.ini
 [servers]
-$1 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/my_ssh_key.pem
+$1 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/my_ssh_key.pem ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 EOF
 
 cat <<EOF > docker-compose.yml
