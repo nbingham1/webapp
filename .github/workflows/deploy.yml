@@ -97,11 +97,13 @@ jobs:
           terraform init
           terraform validate -no-color
           terraform apply -auto-approve
+          echo "EC2_DNS=$(terraform output -raw public_dns)" >> $GITHUB_ENV
+          echo "EC2_IP=$(terraform output -raw public_IP)" >> $GITHUB_ENV
 
           cd ../03_ansible
-          ./setup.sh $(terraform output -raw public_dns) ${{ env.REGISTRY }}/${{ env.BACKEND_NAME }}
+          ./setup.sh $EC2_DNS ${{ env.REGISTRY }}/${{ env.BACKEND_NAME }}
           ansible-playbook -i inventory.ini playbook.yml
-          terraform output -raw public_ip
+          echo $EC2_IP
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
