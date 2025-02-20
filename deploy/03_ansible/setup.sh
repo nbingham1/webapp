@@ -6,8 +6,6 @@ $1 ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/my_ssh_key.pem
 EOF
 
 cat <<EOF > docker-compose.yml
-version: '3.1'
-
 services:
   backend:
     image: $2
@@ -32,7 +30,9 @@ cat <<EOF > playbook.yml
 
     - name: Run Docker Container
       ansible.builtin.shell: |
-        docker compose -f /home/ubuntu/docker-compose.yml up -d
+        docker-compose pull
+        docker compose -f /home/ubuntu/docker-compose.yml up --force-recreate --build -d
+        docker image prune -f
       args:
         chdir: /home/ubuntu
 EOF
