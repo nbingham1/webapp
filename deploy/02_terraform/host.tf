@@ -5,7 +5,7 @@ resource "aws_security_group" "my_security_group" {
 	# HTTP
 	ingress {
 		from_port   = 80
-		to_port     = 3000
+		to_port     = 3333
 		protocol    = "tcp"
 		cidr_blocks = ["0.0.0.0/0"]
 	}
@@ -13,15 +13,7 @@ resource "aws_security_group" "my_security_group" {
 	# HTTPS
 	ingress {
 		from_port   = 443
-		to_port     = 3000
-		protocol    = "tcp"
-		cidr_blocks = ["0.0.0.0/0"]
-	}
-
-	# API
-	ingress {
-		from_port   = 5000
-		to_port     = 5000
+		to_port     = 3333
 		protocol    = "tcp"
 		cidr_blocks = ["0.0.0.0/0"]
 	}

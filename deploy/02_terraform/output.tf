@@ -3,6 +3,11 @@ output "public_ip" {
 	description = "Public IP of the EC2 instance"
 }
 
+output "public_dns" {
+	value = aws_instance.my_host.public_dns
+	description = "Public DNS of the EC2 instance"
+}
+
 resource "local_sensitive_file" "my_ssh_pem_file" {
 	filename = pathexpand("~/.ssh/${aws_key_pair.my_ssh_key.key_name}.pem")
 	file_permission = "600"
