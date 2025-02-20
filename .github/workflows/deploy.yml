@@ -88,6 +88,8 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false
 
       - name: Deploy Infrastructure
         id: infrastructure
@@ -98,8 +100,8 @@ jobs:
           terraform validate -no-color
           terraform apply -auto-approve
 
-          EC2_DNS=$(terraform output -raw public_dns 2>/dev/null | tr -d '\r')
-          EC2_IP=$(terraform output -raw public_ip 2>/dev/null | tr -d '\r')
+          EC2_DNS=$(terraform output -raw public_dns)
+          EC2_IP=$(terraform output -raw public_ip)
           echo "EC2_DNS=${EC2_DNS}" >> $GITHUB_ENV
           echo "EC2_IP=${EC2_IP}" >> $GITHUB_ENV
         env:
