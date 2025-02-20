@@ -101,7 +101,7 @@ jobs:
           echo "EC2_IP=$(terraform output -raw public_IP)" >> $GITHUB_ENV
 
           cd ../03_ansible
-          ./setup.sh $EC2_DNS ${{ env.REGISTRY }}/${{ env.BACKEND_NAME }}
+          ./setup.sh $EC2_DNS ${{ env.REGISTRY }}/${{ env.BACKEND_NAME }}:${{ github.ref_name }}
           ansible-playbook -i inventory.ini playbook.yml
           echo $EC2_IP
         env:
