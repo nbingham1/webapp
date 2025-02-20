@@ -97,8 +97,8 @@ jobs:
           terraform init
           terraform validate -no-color
           terraform apply -auto-approve
-          echo "EC2_DNS=$(terraform output -raw public_dns)" >> $GITHUB_ENV
-          echo "EC2_IP=$(terraform output -raw public_IP)" >> $GITHUB_ENV
+          export EC2_DNS=$(terraform output -raw public_dns)
+          export EC2_IP=$(terraform output -raw public_IP)
 
           cd ../03_ansible
           ./setup.sh $EC2_DNS ${{ env.REGISTRY }}/${{ env.BACKEND_NAME }}:${{ github.ref_name }}
