@@ -14,7 +14,7 @@ aws_secret_access_key = ...
 
 Bootstrap the automation user for terraform
 ```
-cd bootstrap
+cd deploy/00_bootstrap
 terraform init
 terraform plan
 # LOOK OVER YOUR PLAN TO MAKE SURE IT MAKES SENSE
@@ -41,7 +41,7 @@ export AWS_SECRET_ACCESS_KEY=...
 
 Manually run the terraform automation
 ```
-cd infra
+cd deploy/02_terraform
 terraform init
 terraform plan
 # LOOK OVER YOUR PLAN TO MAKE SURE IT MAKES SENSE
@@ -68,7 +68,12 @@ ssh -i "~/.ssh/my_ssh_key.pem" ubuntu@ec2-18-117-168-126.us-east-2.compute.amazo
 
 Build the container
 ```
-docker build -t nbingham1/backend:latest .
+docker build -f deploy/01_docker/Dockerfile -t nbingham1/backend:latest .
+```
+
+Generate deploy commands
+```
+deploy/03_ansible/setup.sh ec2-18-119-142-77.us-east-2.compute.amazonaws.com ghcr.io/nbingham1/backend:main
 ```
 
 Run the container
