@@ -92,6 +92,7 @@ jobs:
       - name: Terraform Deploy
         id: init
         run: |
+          cd infra
           terraform init
           terraform validate -no-color
           terraform plan -no-color
