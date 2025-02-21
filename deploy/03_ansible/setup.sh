@@ -11,7 +11,7 @@ services:
     image: $2
     restart: always
     ports:
-      - 3333:3333
+      - 80:3333
 EOF
 
 # Create Ansible playbook
