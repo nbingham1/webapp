@@ -4,7 +4,7 @@ locals {
 
 terraform {
 	backend "s3" {
-    bucket = "terraform-state-3kcw0h1z"
+    bucket = "terraform-state-avjju1z2"
     key    = "backend"
     region = "us-east-2"
   }
