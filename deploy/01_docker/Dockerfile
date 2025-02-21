@@ -1,4 +1,3 @@
-# Use the official Node.js 22 image as the base image
 FROM golang:1.24.0
 
 # Set the working directory
