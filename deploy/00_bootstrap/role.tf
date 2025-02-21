@@ -29,7 +29,8 @@ resource "aws_iam_policy" "budget_ec2_policy" {
           "ssm:GetCommandInvocation",
           "ssm:DescribeInstanceInformation",
           "ssm:ListCommands",
-          "ssm:ListCommandInvocations"
+          "ssm:ListCommandInvocations",
+          "ssm:StartAutomationExecution"
         ]
         Resource = "*"
       },
